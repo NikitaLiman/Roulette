@@ -1,18 +1,31 @@
-@mixin flex-Center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+@import "../../../mixins.scss";
 
 .header {
   display: flex;
   justify-content: space-between;
   margin-top: 24px;
+  padding: 0 16px;
+
+  @include mobile {
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+    padding: 0 12px;
+  }
+
+  @include tablet {
+    padding: 0 20px;
+  }
 
   &__icons {
     display: flex;
     align-items: center;
     gap: 4px;
+
+    @include mobile {
+      justify-content: center;
+      order: 2;
+    }
 
     &-brick {
       @include flex-Center;
@@ -20,10 +33,19 @@
       height: 32px;
       border-radius: 4px;
 
+      @include mobile {
+        width: 28px;
+        height: 28px;
+      }
+
       img {
         width: 16px;
         height: 100%;
         object-fit: contain;
+
+        @include mobile {
+          width: 14px;
+        }
       }
     }
   }
@@ -33,6 +55,13 @@
     align-items: center;
     gap: 16px;
 
+    @include mobile {
+      justify-content: center;
+      gap: 12px;
+      order: 1;
+      flex-wrap: wrap;
+    }
+
     &-title {
       color: #fcfffe66;
       font-weight: 500;
@@ -40,6 +69,11 @@
       line-height: 20px;
       text-align: center;
       margin-right: 8px;
+
+      @include mobile {
+        font-size: 12px;
+        margin-right: 4px;
+      }
     }
 
     &-item {
@@ -47,11 +81,20 @@
       align-items: center;
       gap: 8px;
 
+      @include mobile {
+        gap: 6px;
+      }
+
       &-icon {
         @include flex-Center;
         width: 24px;
         height: 24px;
         border-radius: 4px;
+
+        @include mobile {
+          width: 20px;
+          height: 20px;
+        }
       }
 
       &-count {
@@ -61,6 +104,11 @@
           line-height: 20px;
           color: white;
           text-align: center;
+
+          @include mobile {
+            font-size: 12px;
+            line-height: 16px;
+          }
         }
       }
     }

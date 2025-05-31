@@ -1,5 +1,17 @@
+@import "../../../mixins.scss";
 .Card {
-  width: 308px;
+  width: 100%;
+  max-width: 308px;
+  margin: 0 auto;
+
+  @include mobile {
+    max-width: 100%;
+    margin: 0 12px;
+  }
+
+  @include tablet {
+    max-width: 350px;
+  }
 
   .bet {
     display: flex;
@@ -8,33 +20,72 @@
     justify-content: space-between;
     height: 44px;
     border-radius: 8px;
+
+    @include mobile {
+      padding: 10px 12px;
+      height: 40px;
+    }
+
     h1 {
       font-weight: 700;
       color: white;
+
+      @include mobile {
+        font-size: 16px;
+      }
     }
-    P {
+
+    p {
       font-weight: 700;
       color: white;
+
+      @include mobile {
+        font-size: 14px;
+      }
     }
   }
+
   .bestTotal {
     display: flex;
     align-items: center;
-
     justify-content: space-between;
     padding: 12px;
+
+    @include mobile {
+      padding: 10px;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
     p {
       color: #fcfffecc;
+
+      @include mobile {
+        font-size: 14px;
+      }
     }
+
     .tokenBlock {
       display: flex;
       align-items: center;
       gap: 8px;
+
+      @include mobile {
+        gap: 6px;
+        align-self: flex-end;
+      }
+
       span {
         color: #fcfffe;
+
+        @include mobile {
+          font-size: 14px;
+        }
       }
     }
   }
+
   .usersBets {
     display: flex;
     flex-direction: column;
@@ -42,31 +93,61 @@
     border-radius: 8px;
     background-color: #23262c;
 
+    @include mobile {
+      gap: 8px;
+    }
+
     &__rows {
       display: flex;
       justify-content: space-between;
       height: 36px;
       padding: 8px 12px;
 
+      @include mobile {
+        height: 32px;
+        padding: 6px 10px;
+      }
+
       .user {
         display: flex;
         align-items: center;
         gap: 6px;
+        flex: 1;
+
+        @include mobile {
+          gap: 4px;
+        }
+
         p {
           font-size: 14px;
           font-weight: 500;
           color: #fcfffecc;
+
+          @include mobile {
+            font-size: 12px;
+          }
         }
       }
+
       .token {
         display: flex;
         align-items: center;
-        justify-content: end;
+        justify-content: flex-end;
         gap: 8px;
-        width: 71px;
+        min-width: 71px;
+
+        @include mobile {
+          gap: 6px;
+          min-width: 60px;
+        }
+
         p {
           font-size: 14px;
           color: #fcfffecc;
+
+          @include mobile {
+            font-size: 12px;
+          }
         }
       }
     }

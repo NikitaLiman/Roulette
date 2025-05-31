@@ -1,19 +1,38 @@
+@import "../../../mixins.scss";
 .container {
-  width: 500px;
+  max-width: 500px;
   height: 44px;
   margin: 36px auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @include mobile {
+    margin: 24px auto;
+    height: 36px;
+    padding: 0 12px;
+  }
   ul {
     display: flex;
     align-items: center;
     gap: 2px;
+    @include mobile {
+      gap: 1px;
+    }
     li {
       width: 51px;
       height: 36px;
       background-color: #343843;
       border-radius: 8px;
+      @include mobile {
+        width: 40px;
+        height: 28px;
+        border-radius: 6px;
+      }
+
+      @include tablet {
+        width: 45px;
+        height: 32px;
+      }
     }
   }
 }
