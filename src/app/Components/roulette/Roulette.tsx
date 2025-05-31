@@ -11,16 +11,11 @@ export const Roulette: React.FC = () => {
     { icon: WhiteVector, backgroundColor: "#343843", multiplier: "2x", id: 0 },
     { icon: BlackVector, backgroundColor: "#FF4242", multiplier: "5x", id: 1 },
     { icon: ClownVector, backgroundColor: "#47FF69", multiplier: "10x", id: 2 },
-    { icon: BlackVector, backgroundColor: "#FF4242", multiplier: "5x", id: 3 },
-    { icon: WhiteVector, backgroundColor: "#343843", multiplier: "2x", id: 4 },
-    { icon: ClownVector, backgroundColor: "#47FF69", multiplier: "10x", id: 5 },
-    { icon: WhiteVector, backgroundColor: "#343843", multiplier: "2x", id: 6 },
-    { icon: BlackVector, backgroundColor: "#FF4242", multiplier: "5x", id: 7 },
   ];
 
   const trackRef = React.useRef<HTMLDivElement>(null);
   const [isSpinning, setIsSpinning] = React.useState<boolean>(false);
-  const [currentRotation, setCurrentRotation] = React.useState<number>(0);
+  const [currentPosition, setCurrentPosition] = React.useState<number>(0);
   const [countdown, setCountdown] = React.useState<number>(60);
   const [winner, setWinner] = React.useState<number | null>(null);
   const [showResult, setShowResult] = React.useState<boolean>(false);
@@ -37,34 +32,31 @@ export const Roulette: React.FC = () => {
     const totalItemWidth = itemWidth + gap;
     const totalItems = rouletteItems.length;
 
-    const preSelectedWinner = Math.floor(Math.random() * totalItems);
+    const selectedWinner = Math.floor(Math.random() * totalItems);
+    setWinner(selectedWinner);
 
-    const fullCycles = 4 + Math.random() * 2;
+    const minFullCycles = 5;
+    const additionalDistance = Math.random() * totalItems * totalItemWidth;
 
-    const containerCenter = trackRef.current.parentElement!.offsetWidth / 2;
+    const centerItemOffset =
+      (trackRef.current.parentElement!.offsetWidth - itemWidth) / 2;
+    const targetPosition = -(
+      selectedWinner * totalItemWidth -
+      centerItemOffset
+    );
 
-    const winnerPositionInFirstCopy =
-      preSelectedWinner * totalItemWidth + itemWidth / 2;
-
-    const fullCycleDistance = fullCycles * totalItems * totalItemWidth;
-
-    const finalPosition =
-      currentRotation -
-      fullCycleDistance -
-      (winnerPositionInFirstCopy - containerCenter);
+    const totalDistance =
+      currentPosition -
+      minFullCycles * totalItems * totalItemWidth -
+      additionalDistance +
+      (targetPosition % (totalItems * totalItemWidth));
 
     trackRef.current.style.transition =
       "transform 4s cubic-bezier(0.25, 0.1, 0.25, 1)";
-    trackRef.current.style.transform = `translateX(${finalPosition}px)`;
+    trackRef.current.style.transform = `translateX(${totalDistance}px)`;
 
     setTimeout(() => {
-      const normalizedPosition = finalPosition % (totalItems * totalItemWidth);
-
-      trackRef.current!.style.transition = "none";
-      trackRef.current!.style.transform = `translateX(${normalizedPosition}px)`;
-
-      setCurrentRotation(normalizedPosition);
-      setWinner(preSelectedWinner);
+      setCurrentPosition(totalDistance);
       setIsSpinning(false);
       setShowResult(true);
 
@@ -72,7 +64,7 @@ export const Roulette: React.FC = () => {
         setShowResult(false);
       }, 3000);
     }, 4000);
-  }, [isSpinning, currentRotation, rouletteItems]);
+  }, [isSpinning, currentPosition, rouletteItems]);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -88,12 +80,18 @@ export const Roulette: React.FC = () => {
     return () => clearInterval(interval);
   }, [initWheel]);
 
+  React.useEffect(() => {
+    if (trackRef.current) {
+      trackRef.current.style.transform = `translateX(${currentPosition}px)`;
+    }
+  }, []);
+
   return (
     <div className={Styles.Roulette}>
       <div className={Styles.wheelContainer}>
         <div className={Styles.wheel}>
           <div ref={trackRef} className={Styles.track}>
-            {[...Array(10)].map((_, copyIndex) =>
+            {[...Array(30)].map((_, copyIndex) =>
               rouletteItems.map((item, index) => (
                 <div
                   key={`${copyIndex}-${index}`}
@@ -132,12 +130,11 @@ export const Roulette: React.FC = () => {
           <div className={Styles.filter}>
             <div className={Styles.countdown}>
               <p>ROLLING IN:</p>
-
               <span>{countdown}</span>
             </div>
           </div>
         )}
-      </div>{" "}
+      </div>
       <div className={Styles.pointer}></div>
     </div>
   );

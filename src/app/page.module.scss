@@ -4,6 +4,7 @@
     .CardContent {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      justify-self: center;
       gap: 16px;
       padding: 0 16px;
       margin: 0 auto;
