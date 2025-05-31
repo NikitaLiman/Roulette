@@ -1,15 +1,12 @@
-import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
+import type { Metadata } from "next";
 import "./globals.css";
 import "./reset.scss";
-const RobotoSans = Roboto({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const RobotoMono = Roboto({
-  variable: "--font-geist-mono",
+const roboto = Roboto({
   subsets: ["latin"],
+  variable: "--font-roboto",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -23,10 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${RobotoSans.variable} ${RobotoMono.variable}`}>
-        {children}
-      </body>
+    <html lang="en" className={roboto.variable}>
+      <body>{children}</body>
     </html>
   );
 }
