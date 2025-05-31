@@ -1,0 +1,68 @@
+@mixin flex-Center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+
+  &__icons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    &-brick {
+      @include flex-Center;
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+
+      img {
+        width: 16px;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+
+  &__stats {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    &-title {
+      color: #fcfffe66;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      text-align: center;
+      margin-right: 8px;
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &-icon {
+        @include flex-Center;
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+      }
+
+      &-count {
+        span {
+          font-weight: 700;
+          font-size: 14px;
+          line-height: 20px;
+          color: white;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

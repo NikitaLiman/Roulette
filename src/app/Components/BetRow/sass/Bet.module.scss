@@ -1,0 +1,19 @@
+.container {
+  width: 500px;
+  height: 44px;
+  margin: 36px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  ul {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    li {
+      width: 51px;
+      height: 36px;
+      background-color: #343843;
+      border-radius: 8px;
+    }
+  }
+}
