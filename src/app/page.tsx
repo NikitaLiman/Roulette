@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Styles from "./page.module.scss";
 import { Container } from "./ui/Container";
 import { Header, Roulette, Card, Bet } from "./Components";

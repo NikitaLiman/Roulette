@@ -6,9 +6,7 @@ import WhiteVector from "@/app/img/Vector (1).svg";
 import ClownVector from "@/app/img/Originals icons.svg";
 import Image from "next/image";
 
-interface Props {}
-
-export const Roulette: React.FC<Props> = () => {
+export const Roulette: React.FC = () => {
   const rouletteItems = [
     { icon: WhiteVector, backgroundColor: "#343843", multiplier: "2x", id: 0 },
     { icon: BlackVector, backgroundColor: "#FF4242", multiplier: "5x", id: 1 },

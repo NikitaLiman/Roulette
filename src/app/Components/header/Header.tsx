@@ -4,9 +4,8 @@ import Image from "next/image";
 import BlackVector from "@/app/img/Vector.svg";
 import WhiteVector from "@/app/img/Vector (1).svg";
 import ClownVector from "@/app/img/Originals icons.svg";
-interface Props {}
 
-export const Header: React.FC<Props> = () => {
+export const Header: React.FC = () => {
   const iconBricks = [
     { icon: WhiteVector, backgroundColor: "#343843" },
     { icon: BlackVector, backgroundColor: "#FF4242" },
