@@ -53,7 +53,7 @@
 
     @include mobile {
       padding: 10px;
-      flex-direction: column;
+      flex-direction: row;
       gap: 8px;
       align-items: flex-start;
     }
